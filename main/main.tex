@@ -1,0 +1,156 @@
+%% Thesis Template of Chinese Academy of Sciences
+%%   for using CASthesis package with LaTeX2e
+%%
+%% Created by Ling-Yun Wu <aloft@ctex.org>
+%%
+%% Version 0.1 (2004-08-15)
+%% Modified by Lei Zhao, 2010-04-10
+\expandafter\def\csname CTEX@spaceChar\endcsname{\hspace{1em}}
+\documentclass[openany]{SUDAthesis}
+\usepackage{xeCJK}
+\usepackage{cite}
+\usepackage{pdfpages}
+\usepackage{tabularx}
+\usepackage[normalsize,center]{caption2}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{subfigure}
+\usepackage{stmaryrd}
+\usepackage{txfonts}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage[linesnumbered, ruled, vlined, shortend]{algorithm2e}
+
+\renewenvironment{quote}{\vspace{2ex} \newline \kaishu “}{”  \vspace{2ex} \newline }
+
+% algorithm2e使用
+\renewcommand{\contentsname}{目\CASTspace 录}
+\renewcommand{\listfigurename}{插\CASTspace 图}
+\renewcommand{\listtablename}{表\CASTspace 格}
+\renewcommand{\listalgorithmcfname}{算\CASTspace 法}
+\renewcommand{\algorithmcfname}{算法}
+
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+% 参考文献上标格式定义
+\newcommand{\ucite}[1]{\textsuperscript{\cite{#1}}}
+\renewcommand{\thealgocf}{\arabic{chapter}.\arabic{algocf}}
+\numberwithin{algocf}{chapter}
+
+
+\graphicspath{{../figures/}}
+
+\begin{document}
+
+%% 小节标题靠左对齐（必须在 \begin{document} 之后，否则无效}
+\CTEXsetup[format+={\flushleft}]{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 封面部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % 中文封面内容
+  \title{知识关联网络驱动的语义关联度计算方法的研究}
+  \author{李佳鹏}
+  \advisor{赵雷}
+  \degree{硕~士~}
+  \major{计算机科学与技术}
+  \minor{计算机科学与技术}
+  \submitdate{2020年3月}
+  \grade{2~0~2~0~届}
+
+  % 英文封面内容
+  \englishtitle{Measuring Semantic Relatedness With Knowledge Association Network}
+  \englishAbstractTitle{Measuring Semantic Relatedness With Knowledge Association Network}
+  \englishfancytitle{Measuring Semantic Relatedness With KAN}
+  \englishauthor{Jiapeng Li}
+  \englishadvisor{Lei Zhao}
+
+  % 封面
+  \includepdf{cover.pdf}
+  \cleardoublepage
+
+  % 版权页
+  %\CopyrightPage
+  \includepdf{copyrightPage1.pdf}
+  \cleardoublepage
+  \includepdf{copyrightPage2.pdf}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 前言部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frontmatter
+
+  % 中英文摘要
+  \setAbstractStyle
+  \input{../chapter/abstract-ch}
+
+  \newpage
+  \thispagestyle{empty}
+  \setEnAbstractStyle
+  \input{../chapter/abstract-en}
+
+  \newpage
+  \thispagestyle{empty}
+
+  % 目录
+  \setContentsStyle
+  \tableofcontents
+  % 插图目录
+  \listoffigures
+  % 表格目录
+  \listoftables
+  % 算法目录
+  \listofalgorithms
+
+%先定义好环境变量名称
+%\newtheorem{observation}{观察}
+%\newtheorem{PruneStrategy}{剪枝规则}
+\newtheorem{definition}{定义}
+\newtheorem{lemma}{引理}
+\newtheorem{theorem}{定理}
+\newtheorem{pf}{证明}
+\newtheorem{code}[thm]{代码}
+\newtheorem{RULE}{规则}
+\newtheorem{example}{例}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 正文部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+  \setstyle
+  \xiaosihao
+
+  \input{../chapter/chap01}
+  \input{../chapter/chap02}
+  \input{../chapter/chap03}
+  \input{../chapter/chap04}
+  \input{../chapter/chap05}
+  \input{../chapter/chap06}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 附件部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\backmatter
+
+  \xiaosihao
+
+  % 参考文献
+  \kaishu
+  \bibliographystyle{sudabst}
+  \bibliography{../bib/ref}
+
+  \songti
+
+  %发表文章目录
+  \input{../chapter/pub}
+
+  % 致谢
+  \newpage
+  \thispagestyle{empty}
+  \setThanksStyle
+  \input{../chapter/thanks}
+
+\end{document}

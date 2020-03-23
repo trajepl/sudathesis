@@ -1,0 +1,21 @@
+\begin{englishabstract}
+
+    % Measuring semantic relatedness is suggested to produce a score which indicates how two objects are related. The objects can be words in texts, or goods, or search words and documents, follows that semantic relatedness measurement is a fundamental task for many applications in natural language processing, recommendations and computer vision domains. Many researchers pay attention to semantic relatedness computing between words.Conventional methods mainly utilize the latent semantic information hidden in lexical databases or text corpus to compute semantic relatedness and make great achievements. However these methods ignore the semantic network behind words. Recently, some other approaches have made great efforts based on free association network and achieved a significant improvement on relatedness measurement. Nevertheless, they need complex preprocessing in Wikipedia. Besides, the fixed score functions they employ cause the lack of flexibility and expressiveness of model. 
+
+    Measuring semantic relatedness is suggested to produce a score which indicates how two words are related. This task plays a very important role in natural language processing and recommendation system, and also attracts many researchers' interest. Conventional methods mainly utilize the latent semantic information hidden in lexical databases or text corpus to compute semantic relatedness and make great achievements. However these methods ignore the semantic network behind words. Recently, some other approaches have made great efforts based on free association network and achieved a significant improvement on relatedness measurement. Nevertheless, they need complex preprocessing in Wikipedia. Besides, the fixed heuristic functions they employ cause the lack of flexibility and expressiveness of model. 
+
+    To remedy the weaknesses of free association network-based methods, this paper constructs Knowledge Association Network based on the relationship between words and different knowledge graphs. Moreover, to improvement the performance of semantic relatedness measurement, this paper use the way of network embedding to learn flexible and robust knowledge representation. Specifically, this paper contains two parts.
+  
+    (1) Measuring semantic relatedness with WordNet Association Network. As the classical lexical base, WordNet contains the synonyms, hypernyms and hyponyms etc., which naturally make up a hierarchical lexical network. This paper utilizes the relationship between words and synsets in WordNet to construct the Association Network. Then we get the lexical vector representation of synsets by network embedding models. The experiment results based on standard datasets show that the network embedding model based on self attention can better learn the vector representation of entities. Moreover, we can get better performance by combining vector of synsets and word vector based on text corpus(Wikipedia).
+  
+    (2) Measuring semantic relatedness with DBpedia Association Network Representation Learning. DBpedia is a knowledge graph which consists of rich texts and entities information extracted from Wikipedia. This paper constructs the relationship between words and entities in DBpedia based on the idea of TF-IDF. We leverage the relatedness among entities to enrich the semantic information of words. We also propose a flexible and expressive model to represent entities behind the words, in which attribute and the topological structure information of entities are embedded in vector space simultaneously. The experiment results based on standard datasets show the better effectiveness of our model compared to previous models.
+
+    Compared with the traditional free association network, the knowledge association network constructed based on the knowledge graph avoids the complex text preprocessing. At the same time, this paper gives the calculation process for the knowledge association network constructed by different knowledge bases. Compared with the heuristic function designed by human, the network learning process proposed in this paper is more flexible and robust, and has achieved good results.
+
+\englishkeywords{Semantic Relatedness, Knowledge Graph, Network Embedding}
+
+\end{englishabstract}
+
+\ensoochowauthor{~Jiapeng Li~\quad }
+
+\ensoochowtutor{Lei Zhao\quad}
