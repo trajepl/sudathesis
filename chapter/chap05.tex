@@ -131,9 +131,9 @@
     \center
     \smallcaption{不同网络嵌入模型在实体层语义关联度计算上的相关系数表现：皮尔森-$\lambda$, 斯皮尔曼秩-$\rho$, 调和平均-$\mu$相关系数}
     \vspace{5pt}
-    \begin{tabular}{l|c|c|c|c|c|c|c|c|c|c}
+    \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
     \hline
-    \multirow{2}{*}{图嵌入模型}     & \multirow{2}{*}{策略} & \multicolumn{3}{c|}{$\lambda$} & \multicolumn{3}{c|}{$\rho$} & \multicolumn{3}{c}{$\mu$} \\ \cline{3-11} 
+    \multirow{2}{*}{图嵌入模型}     & \multirow{2}{*}{策略} & \multicolumn{3}{c|}{$\lambda$} & \multicolumn{3}{c|}{$\rho$} & \multicolumn{3}{c|}{$\mu$} \\ \cline{3-11} 
      &
        &
       \multicolumn{1}{c|}{\textbf{MC}} &
@@ -144,7 +144,7 @@
       \multicolumn{1}{c|}{\textbf{WS}} &
       \multicolumn{1}{c|}{\textbf{MC}} &
       \multicolumn{1}{c|}{\textbf{RG}} &
-      \multicolumn{1}{c}{\textbf{WS}} \\ \hline
+      \multicolumn{1}{c|}{\textbf{WS}} \\ \hline
     \multirow{2}{*}{node2vec} &
       max &
       \multicolumn{1}{c|}{0.535} &
@@ -155,7 +155,7 @@
       \multicolumn{1}{c|}{-0.093} &
       \multicolumn{1}{c|}{0.419} &
       \multicolumn{1}{c|}{0.528} &
-      \multicolumn{1}{c}{-0.064} \\ \cline{2-11} 
+      \multicolumn{1}{c|}{-0.064} \\ \cline{2-11} 
                                & mean & 0.142 & 0.263 & -0.001 & 0.197 & 0.320 & -0.039 & 0.165 & 0.289 & -0.002 \\ \hline
     \multirow{2}{*}{GraphSage} & max  & 0.872 & 0.808 & 0.421 & 0.833 & 0.799 & 0.173 & 0.852 & 0.803 & 0.245 \\ \cline{2-11} 
                                & mean & 0.706 & 0.637 & 0.464 & 0.661 & 0.641 & 0.458 & 0.683  & 0.639 & 0.461 \\ \hline
@@ -207,9 +207,9 @@ WordNet中存储了描述词语不同含义的同义实体集，这些实体之�
     \center
     \smallcaption{不同的权重分配策略构建的知识关联网络在三种数据集上的皮尔森-$\lambda$, 斯皮尔曼秩-$\rho$, 调和平均-$\mu$相关系数}
     \vspace{5pt}
-    \begin{tabular}{l|c|c|c|c|c|c|c|c|c}
+    \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
     \hline
-    \multirow{2}{*}{模型} & \multicolumn{3}{c|}{$\lambda$}     & \multicolumn{3}{c|}{$\rho$}          & \multicolumn{3}{c}{$\mu$} \\ \cline{2-10} 
+    \multirow{2}{*}{模型} & \multicolumn{3}{c|}{$\lambda$}     & \multicolumn{3}{c|}{$\rho$}          & \multicolumn{3}{c|}{$\mu$} \\ \cline{2-10} 
                            & \textbf{MC}&\textbf{RG}&\textbf{WS} & \textbf{MC}&\textbf{RG}&\textbf{WS} & \textbf{MC}&\textbf{RG}&\textbf{WS}\\ \hline
     $KAN_{cnt}$            & 0.850 & 0.826 & 0.630 & 0.836 & 0.805 & 0.633 & 0.842 & 0.816 & 0.631   \\ \hline
     $KAN_{tf\_idf}$        & $\bf 0.892$  & $\bf 0.887$ & $\bf 0.783$ & $\bf 0.866$ & $\bf 0.861$ & $\bf 0.835$ & $\bf 0.879$ & $\bf 0.874$ & $\bf 0.808$ \\ \hline
@@ -262,9 +262,9 @@ WordNet中存储了描述词语不同含义的同义实体集，这些实体之�
     \center
     \smallcaption{不同语义关联度计算模型在三种数据集上的皮尔森-$\lambda$, 斯皮尔曼秩-$\rho$, 调和平均-$\mu$相关系数}
     \vspace{5pt}
-    \begin{tabular}{l|c|c|c|c|c|c|c|c|c}
+    \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
     \hline
-    \multirow{2}{*}{模型} & \multicolumn{3}{c|}{$\lambda$}     & \multicolumn{3}{c|}{$\rho$}          & \multicolumn{3}{c}{$\mu$} \\ \cline{2-10} 
+    \multirow{2}{*}{模型} & \multicolumn{3}{c|}{$\lambda$}     & \multicolumn{3}{c|}{$\rho$}          & \multicolumn{3}{c|}{$\mu$} \\ \cline{2-10} 
                            & \textbf{MC}&\textbf{RG}&\textbf{WS} & \textbf{MC}&\textbf{RG}&\textbf{WS} & \textbf{MC}&\textbf{RG}&\textbf{WS}\\ \hline
     ESA                    & 0.588 &  - -  & 0.503 & 0.727 &  - -  & 0.748 & 0.650 &  - - & 0.602    \\ \hline
     SSA                    & 0.879 & 0.861 & 0.590 & 0.843 & 0.833 & 0.604 & 0.861 & 0.847 & 0.597   \\ \hline
