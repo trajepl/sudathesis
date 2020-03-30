@@ -634,6 +634,8 @@
 %%\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont} %%四号 
 %\renewcommand\tablename{\xiaosihao 表}
 %\renewcommand\figurename{\xiaosihao 图}
+\renewcommand{\thetable}{\arabic{chapter}-\arabic{table}}
+\renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
 
 \newcommand{\xiaosihao}{\fontsize{12pt}{18pt}\selectfont}%%小四号
 \newcommand{\sihao}{\fontsize{14pt}{18pt}\selectfont} %%四号 
