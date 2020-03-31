@@ -237,12 +237,34 @@ FUNCTION {format.title}
   if$
 }
 
+FUNCTION {format.inproceedings.booktitle}
+{ booktitle empty$
+    { "" }
+    { editor empty$
+	{ booktitle " [C]. " * }
+	{ editor * ". " * booktitle " [C]. " *  }
+      if$
+    }
+  if$
+}
+
+FUNCTION {format.inproceedings.org}
+{ organization empty$
+    { "" * }
+    { address empty$
+	{ organization * }
+	{ address * ": " * organization *  }
+      if$
+    }
+  if$
+}
+
 FUNCTION {format.inproceedings.title}
 { title empty$
     { "" }
-    { editor empty$
-	{ title "[C]" * }
-	{ "[C]" format.editors * ", " * title * }
+    { booktitle empty$
+	{ title " [C]. " * }
+	{ title " [A]. " * format.inproceedings.booktitle *  }
       if$
     }
   if$
@@ -252,8 +274,8 @@ FUNCTION {format.article.title}
 { title empty$
     { "" }
     { editor empty$
-	{ title "[J]" * }
-	{ "[J]" format.editors * ", " * title * }
+	{ title " [J]" * }
+	{ " [J]" format.editors * ", " * title * }
       if$
     }
   if$
@@ -286,12 +308,27 @@ FUNCTION {format.book.title}
 { title empty$
     { "" }
     { editor empty$
-	{ title "[M]" * }
-	{ "[M]" format.editors * ", " * title * }
+	{ title " [M]. " * }
+	{ " [M]. " format.editors * ", " * title * }
+      if$
+    }
+
+  if$
+}
+
+FUNCTION {format.book.org}
+{ publisher empty$
+    { "" *}
+    { address empty$
+	{ publisher * }
+	{ address * ": " * publisher *  }
       if$
     }
   if$
 }
+
+
+
 
 FUNCTION {format.techreport.title}
 { title empty$
@@ -654,8 +691,12 @@ FUNCTION {book}
       new.block
       format.number.series output
       new.sentence
-      publisher "publisher" output.check
-      address output
+      publisher empty$
+	  'skip$
+	  {
+        format.book.org output
+	  }
+		if$
     }
     { new.block
       format.book.crossref output.nonnull
@@ -750,7 +791,12 @@ FUNCTION {inproceedings}
   new.block
   crossref missing$
     {
-      format.in.ed.booktitle "booktitle" output.check
+	  organization empty$
+	  'skip$
+	  {
+        format.inproceedings.org
+	  }
+	  if$
       format.year.pages output
     }
     { format.article.crossref output.nonnull
@@ -837,41 +883,6 @@ FUNCTION {phdthesis}
   school output
   address output
   format.date "year" output.check
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {proceedings}
-{ output.bibitem
-  editor empty$
-    { organization output }
-    { format.editors output.nonnull }
-  if$
-  new.block
-  format.btitle "title" output.check
-  format.bvolume output
-  format.number.series output
-  address empty$
-    { editor empty$
-	{ publisher new.sentence.checka }
-	{ organization publisher new.sentence.checkb
-	  organization output
-	}
-      if$
-      publisher output
-      format.date "year" output.check
-    }
-    { address output.nonnull
-      format.date "year" output.check
-      new.sentence
-      editor empty$
-	'skip$
-	{ organization output }
-      if$
-      publisher output
-    }
-  if$
   new.block
   note output
   fin.entry
