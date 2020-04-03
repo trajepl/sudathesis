@@ -179,13 +179,13 @@ WordNet中存储了描述词语不同含义的同义实体集，这些实体之�
     \begin{minipage}{0.48\textwidth}
       \centering
       \includegraphics[width=1\textwidth]{params_lambda_w_max.pdf}
-      \smallcaption{基于max策略的语义关联度计算中$\lambda$参数对于模型表现的影响}
+      \smallcaption{基于max策略的语义关联度计算中$\varphi$参数对于模型表现的影响}
       \label{fig:lambda_w_max}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
       \centering
       \includegraphics[width=1\textwidth]{params_lambda_w_mean.pdf}
-      \smallcaption{基于mean策略的语义关联度计算中$\lambda$参数对于模型表现的影响}
+      \smallcaption{基于mean策略的语义关联度计算中$\varphi$参数对于模型表现的影响}
       \label{fig:lambda_w_mean}
     \end{minipage}
     \label{fig:wordnet_sr}
@@ -197,9 +197,9 @@ WordNet中存储了描述词语不同含义的同义实体集，这些实体之�
 \textbf{参数设置：}
 在基于DBpedia构建的知识关联网络中，需要确定的模型参数如下：
 \begin{itemize}
-    \item 在~\ref{dbpedia_word2vec}~中，本文在处理后的Wikipedia语料库上训练Word2Vec模型，在这部分，本文采用100维向量输出, 30窗口大小以及Skip-gram model与negative sampling的结合来训练得到词向量。
+    \item 在~\ref{dbpedia_word2vec}~中，本文在处理后的Wikipedia语料库上训练Word2Vec模型，在这部分，本文采用100维向量输出, 30窗口大小以及SkipGram model与Negative Sampling的结合来训练得到词向量。
     \item 在实体层属性空间嵌入部分，本文设置间隔margin $\ell=0.05$, 输出维度 $d=100$, 负采样数 $k=50$, 本文还设置随机梯度下降的学习率为$0.01$来优化Margin Ranking损失。
-    \item 在实体层网络拓扑结构空间嵌入部分，本文采用Skip-gram模型来训练随机采样的序列，其中偏置随机游走中$p$和$q$的值分别设置为0.7和0.3，同时本文采用100维的输出维度, 10的窗口大小来训练模型。
+    \item 在实体层网络拓扑结构空间嵌入部分，本文采用SkipGram模型来训练随机采样的序列，其中偏置随机游走中$p$和$q$的值分别设置为0.7和0.3，同时本文采用100维的输出维度, 10的窗口大小来训练模型。
 \end{itemize}
 
 
@@ -219,11 +219,11 @@ WordNet中存储了描述词语不同含义的同义实体集，这些实体之�
 
 
 \textbf{模型表现：}
-回顾\ref{subsec4-3-3}节实体层之间的关联度度量，对于实体所处的拓扑结构空间，本文采用两种策略来为实体之间的关系分配权重：1）$W_{cnt}(e_i,e_j)$表示实体$e_i$与实体$e_j$对应的锚文本之间的共现频率；2）$W_{tf\_idf}(e_i,e_j)$评估了实体$e_j$的锚文本相对于$e_i$所对应文章的重要程度。基于这两种评价策略，本文分别构造得到两种知识关联网络$KAN_{cnt}$以及$KAN_{tf\_idf}$。从表格~\ref{table5-6}~中可以看出，基于$KAN_{tf\_idf}$的语义关联度度量模型在不同评测数据集上表现都更加好。这是因为$TF-IDF$适当的调节了文章中的关键词词频，通过考虑逆文档频率降低了高频通用词的权重，使得词语与文档之间的关联度度量更准确。
+回顾\ref{subsec4-3-3}节实体层之间的关联度度量，对于实体所处的拓扑结构空间，本文采用两种策略来为实体之间的关系分配权重：1）$W_{cnt}(e_i,e_j)$表示实体$e_i$与实体$e_j$对应的锚文本之间的共现频率；2）$W_{tf\_idf}(e_i,e_j)$评估了实体$e_j$的锚文本相对于$e_i$所对应文章的重要程度。基于这两种评价策略，本文分别构造得到两种知识关联网络$KAN_{cnt}$以及$KAN_{tf\_idf}$。从表格~\ref{table5-6}~中可以看出，基于$KAN_{tf\_idf}$的语义关联度度量模型在不同评测数据集上表现都更加好。这是因为$tf-idf$适当的调节了文章中的关键词词频，通过考虑逆文档频率降低了高频通用词的权重，使得词语与文档之间的关联度度量更准确。
 
 前文提到的参数$\alpha$用来平衡属性空间关联度与拓扑结构空间关联度之间的权重。为了得到最优的模型表现和提高模型鲁棒性，本文不在最终评测数据集上调节参数，而是选择在数据集\emph{WS-Rel}~\cite{ws/AgirreAHKPS09}试验参数$\alpha$对最终结果的影响。\emph{WS-Rel}中包含有252个单词对以及关联度评分值，这个数据集在很多关联度数据集中没有被使用。图~\ref{fig:alpha}~展示了不同的$\alpha$取值对最后Spearman相关系数($\rho$)的影响，可以看出当$\alpha$趋近于0.5的时候，$\rho$取值最大，这意味着属性空间的语义信息与拓扑结构中所包含的隐含语义信息对语义关联度的计算有着相同的共现。
 
-另一个参数$\varphi$起到权衡知识关联网络中实体层$F_e$与词语层语义关联度$F_w$的作用。图~\ref{fig:lambda}~展示了$F_e$和$F_w$对在最终评测数据集上对最终语义关联度计算的影响，可见当$\varphi=0.2$时，Spearman相关系数$\rho$取值达到最大。显然，$F_w$对最后的语义关联度计算影响更大，起到了主导的作用，而$F_e$中包含的隐含语义信息也有效的丰富了词语的语义空间，使得最终的关联度计算值有所提升。
+另一个参数$\varphi$起到权衡知识关联网络中实体层$F_e$与词语层语义关联度$F_w$的作用。图~\ref{fig:lambda}~展示了$F_e$和$F_w$对在最终评测数据集上对最终语义关联度计算的影响，可见当$\varphi=0.2$时，Spearman相关系数$\rho$取值达到最大。显然，$F_w$对最后的语义关联度计算影响更大，起到了主导的作用，而$F_e$中包含的隐含语义信息也有效地丰富了词语的语义空间，使得最终的关联度计算值有所提升。
 
 \begin{figure}[htbp]
     \begin{minipage}{0.48\textwidth}
@@ -235,7 +235,7 @@ WordNet中存储了描述词语不同含义的同义实体集，这些实体之�
     \begin{minipage}{0.48\textwidth}
       \centering
       \includegraphics[width=1\textwidth]{params_lambda_d.pdf}
-      \smallcaption{$\lambda$参数对于模型表现的影响}
+      \smallcaption{$\varphi$参数对于模型表现的影响}
       \label{fig:lambda}
     \end{minipage}
 \end{figure}

@@ -14,7 +14,7 @@
 % 意义
 DBpedia是一项由开源社区维护的百科开源知识图谱，它源自于Wikipedia又不止与此。基于万物互连的思想，DBpedia连接起了Wikipedia、Wikitionary、WordNet以及其它大型开源知识库如Yago等，不仅如此，DBpedia还提供了可供全网访问的服务，研究者们可以以DBpedia为基础挖掘到越来越多的知识信息，大大方便了各项人工智能任务的推进。
 
-至2016年10月，DBpedia中包含了大约600万实体和13亿条RDF三元组，实体周围包含着丰富的语义信息。如图\ref{chap4-1}所示，对于科技公司\emph{Apple}，其在DBpedia中有唯一的URI（统一资源定位符）表示\emph{<http://dbpedia.org/page/Apple\_Inc>}，简记为\emph{Apple\_Inc}，同时还有多种实体以不同关系与\emph{Apple\_Inc}相连。其中，如\emph{Apple\_Inc}是\emph{IPod\_Mini}的生产商、\emph{Apple\_Inc}是一家公司\emph{Company}以及\emph{Apple\_Inc}位于\emph{California}等等描述了该实体的属性（Attributes）空间；而另一些关系如图\ref{chap4-1}所示，不包含明确的语义信息，仅仅在语料库中与该实体通过页面重定向关系（Wikipage Redirects of）相连。
+至2016年10月，DBpedia中包含了大约600万实体和13亿条RDF三元组，实体周围包含着丰富的语义信息。如图\ref{chap4-1}所示，对于科技公司\emph{Apple}，其在DBpedia中有唯一的URI（统一资源定位符）表示\emph{http://dbpedia.org/page/Apple\_Inc}，简记为\emph{Apple\_Inc}，同时还有多种实体以不同关系与\emph{Apple\_Inc}相连。其中，如\emph{Apple\_Inc}是\emph{IPod\_Mini}的生产商、\emph{Apple\_Inc}是一家公司\emph{Company}以及\emph{Apple\_Inc}位于\emph{California}等等描述了该实体的属性（Attributes）空间；而另一些关系如图\ref{chap4-1}所示，不包含明确的语义信息，仅仅在语料库中与该实体通过页面重定向关系（Wikipage Redirects of）相连。
 
 %存储
 DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据库OpenLink Virtuoso\footnote{https://virtuoso.openlinksw.com/}中，并且用户可以通过Virtuoso开放的SPARQL端口\footnote{http://dbpedia.org/sparql}来通过HTTP请求访问DBpedia中的数据。其中SPARQL是一种针对RDF数据的图查询语言，能够自定模式来查询知识图谱中符合模式条件的三元组。
@@ -30,7 +30,7 @@ DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据�
 
 在上一章中基于WordNet构建的知识关联网络中，词语与WordNet实体之间的对应关系被人工标记并存储在WordNet中，可以很方便地被查询到。与之不同的是，我们无法直接拿到词语与DBpedia实体的关系。但是语料库Wikipedia中则包含了丰富的词语，其文本由词语构成，分类信息、外链信息等也都自然地表现为文本。而且Wikipedia中的页面也与DBpedia中的实体一一对应。文本基于这种对应关系，通过Wikipedia建立其词语与DBpedia中实体的对应关系。
 
-如图\ref{chap4-2}所示，我们给出了基于DBpedia构建知识关联网络的例子。对于一个给定的单词$apple$，通过TF-IDF或词频统计等文本分析手段，我们可以得到与之相关的维基页面，比如维基百科中描述一种水果的$Apple$页面和描述一家公司的$Apple\_Inc$页面，其中每个维基页面有一个重要的属性叫做\emph{WikiPageId}，形式上表现为数字，唯一地标示了Wikipedia中的一篇文章。这个属性在DBpedia中也作为对应实体的属性存在。因此我们可以通过SPARQL查询到对应的DBpedia实体。举个例子来说，描述一种水果的$Apple$页面的\emph{WikiPageId}的值是$856$，我们可以通过如下的查询语言得到对应的DBpedia实体。
+如图\ref{chap4-2}所示，我们给出了基于DBpedia构建知识关联网络的例子。对于一个给定的单词$apple$，通过$tf-idf$或词频统计等文本分析手段，我们可以得到与之相关的维基页面，比如维基百科中描述一种水果的$Apple$页面和描述一家公司的$Apple\_Inc$页面，其中每个维基页面有一个重要的属性叫做\emph{WikiPageId}，形式上表现为数字，唯一地标示了Wikipedia中的一篇文章。这个属性在DBpedia中也作为对应实体的属性存在。因此我们可以通过SPARQL查询到对应的DBpedia实体。举个例子来说，描述一种水果的$Apple$页面的\emph{WikiPageId}的值是$856$，我们可以通过如下所示的查询代码得到对应的DBpedia实体。
 
 \begin{lstlisting}[basicstyle=\fontsize{10}{11}\ttfamily,aboveskip=1em,frame=shadowbox]
     PREFIX dbo: <http://dbpedia.org/ontology/>
@@ -112,7 +112,7 @@ DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据�
     W_{cnt}(e_i, e_j) = \frac{cnt(e_i, e_j)}{\sum_{e^{'} \in P_i}^{ }cnt(e_i, e^{'})}
 \end{equation}
 
-\noindent 其中$P_i$表示实体$e_i$对应的维基页面，$e^{'}$则是$P_i$中的外链锚文本指向的维基页面描述的实体。然而仅仅考虑锚文本的频率会给予很多高频词更好的权重，然而其与本实体关联度并不高。为了弥补这样的缺点，我们计算$t_j$相对于页面$P_i$的TF-IDF（Term Frequency–Inverse Document Frequency）值作为实体$e_i$到$e_j$转移概率：
+\noindent 其中$P_i$表示实体$e_i$对应的维基页面，$e^{'}$则是$P_i$中的外链锚文本指向的维基页面描述的实体。然而仅仅考虑锚文本的频率会给予很多高频词更好的权重，然而其与本实体关联度并不高。为了弥补这样的缺点，我们计算$t_j$相对于页面$P_i$的$tf-idf$（Term Frequency–Inverse Document Frequency）值作为实体$e_i$到$e_j$转移概率：
 \begin{equation}
     \label{w_tf-idf_formula}
     W_{tf\_idf}(e_i, e_j) = \frac{tf\_idf(e_i, e_j)}{\sum_{e^{'} \in P_i}^{ }tf\_idf(e_i, e^{'})}
@@ -137,7 +137,7 @@ DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据�
 \end{equation} 
 \noindent 其中$t$表示上次访问的节点，$x$代表下一个要访问的节点，$d_{tx}$表示节点$t$与节点$x$之间的距离，参数$p$和$q$是两个需要提前设置的参数，用来调控深度优先遍历与广度优先遍历对采样过程的影响。
 
-如图\ref{chap4-4} 所示，对于给定的DBpedia无权图，我们通过上述基于TF-IDF的方法给图中节点之间的关系加权，然后通过公式\ref{zeta}中的偏置随机游走策略生成采样序列。图\ref{chap4-4}右侧子图展示了偏置随机游走的过程，假设我们经过红色节点$t$到达了蓝色节点$v$，接下来可能走向的节点包含$\{t, x_1, x_2\}$，根据节点$t$到到这些节点的距离，对应的偏置权重如图所示，对于$x_1$来说，$d_{tx_1}$的值为2，则$x_1$作为随机游走的下一个节点的概率为边的的权重乘上$1/q$，其他节点类似。
+如图\ref{chap4-4} 所示，对于给定的DBpedia无权图，我们通过上述基于$tf-idf$的方法给图中节点之间的关系加权，然后通过公式\ref{zeta}中的偏置随机游走策略生成采样序列。图\ref{chap4-4}右侧子图展示了偏置随机游走的过程，假设我们经过红色节点$t$到达了蓝色节点$v$，接下来可能走向的节点包含$\{t, x_1, x_2\}$，根据节点$t$到到这些节点的距离，对应的偏置权重如图所示，对于$x_1$来说，$d_{tx_1}$的值为2，则$x_1$作为随机游走的下一个节点的概率为边的的权重乘上$1/q$，其他节点类似。
 
 \begin{figure}[!ht]
     \centerline{\includegraphics[width=1\textwidth]{chap4-4.pdf}}
