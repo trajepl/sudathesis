@@ -111,6 +111,7 @@
 \renewcommand{\floatpagefraction}{0.80}
 %\bibliographystyle{plain}
 \newcommand\CASTspace{\protect\CTEX@spaceChar\protect\CTEX@spaceChar}
+\newcommand{\fancyheadzihao}{\zihao{-5}}
 \def\CAST@getfileinfo#1 #2 #3\relax#4\relax{%
   \def\CASTfiledate{#1}%
   \def\CASTfileversion{#2}%
@@ -246,51 +247,51 @@
 \newcommand\setstyle{
     \fancypagestyle{plain}{
       \fancyhf{}
-      \fancyhead[LO,RE]{\songti \small \CAST@value@titlemark}
-      \fancyhead[RO,LE]{\songti \small \leftmark}
-      \fancyfoot[C]{\small ~\thepage~}
+      \fancyhead[LO,RE]{\songti \fancyheadzihao \CAST@value@titlemark}
+      \fancyhead[RO,LE]{\songti \fancyheadzihao \leftmark}
+      \fancyfoot[C]{\fancyheadzihao ~\thepage~}
     }
     \pagestyle{fancy}
     \fancyhf{}
-    \fancyhead[LO,RE]{\songti \small \CAST@value@titlemark}
-    \fancyhead[RO,LE]{\songti \small \leftmark}
-    \fancyfoot[C]{\small ~\thepage~}
+    \fancyhead[LO,RE]{\songti \fancyheadzihao \CAST@value@titlemark}
+    \fancyhead[RO,LE]{\songti \fancyheadzihao \leftmark}
+    \fancyfoot[C]{\fancyheadzihao ~\thepage~}
     \renewcommand{\headrulewidth}{0.4pt}
 }
 
 \newcommand\setAbstractStyle{
   \fancypagestyle{plain}{
     \fancyhf{}
-    \fancyhead[LO]{\small \CAST@value@titlemark}
-    \fancyhead[RE]{\small \CAST@value@titlemark}
+    \fancyhead[LO]{\fancyheadzihao \CAST@value@titlemark}
+    \fancyhead[RE]{\fancyheadzihao \CAST@value@titlemark}
     %\fancyhead[RE]{\small \CAST@value@englishfancytitle }
-    \fancyhead[RO,LE]{\small \leftmark}
-    \fancyfoot[C]{\small ~\thepage~}
+    \fancyhead[RO,LE]{\fancyheadzihao \leftmark}
+    \fancyfoot[C]{\fancyfoot ~\thepage~}
   }
   \pagestyle{fancy}
   \fancyhf{}
-  \fancyhead[LO]{\small \CAST@value@titlemark}
-  \fancyhead[RE]{\small \CAST@value@titlemark}
+  \fancyhead[LO]{\fancyheadzihao \CAST@value@titlemark}
+  \fancyhead[RE]{\fancyheadzihao \CAST@value@titlemark}
   %\fancyhead[RE,LO]{\small \CAST@value@englishfancytitle }
-  \fancyhead[RO,LE]{\small \leftmark}
-  \fancyfoot[C]{\small ~\thepage~}
+  \fancyhead[RO,LE]{\fancyheadzihao \leftmark}
+  \fancyfoot[C]{\fancyheadzihao ~\thepage~}
   \renewcommand{\headrulewidth}{0.4pt}
 }
 
 \newcommand\setEnAbstractStyle{
   \fancypagestyle{plain}{
     \fancyhf{}
-    \fancyhead[LO]{\small \CAST@value@englishfancytitle}
-    \fancyhead[RE]{\small \CAST@value@englishfancytitle }
-    \fancyhead[RO,LE]{\small \leftmark}
-    \fancyfoot[C]{\small ~\thepage~}
+    \fancyhead[LO]{\fancyheadzihao \CAST@value@englishfancytitle}
+    \fancyhead[RE]{\fancyheadzihao \CAST@value@englishfancytitle }
+    \fancyhead[RO,LE]{\fancyheadzihao \leftmark}
+    \fancyfoot[C]{\fancyheadzihao ~\thepage~}
   }
   \pagestyle{fancy}
   \fancyhf{}
-  \fancyhead[LO]{\small \CAST@value@englishfancytitle}
-  \fancyhead[RE]{\small \CAST@value@englishfancytitle}
-  \fancyhead[RO,LE]{\small \leftmark}
-  \fancyfoot[C]{\small ~\thepage~}
+  \fancyhead[LO]{\fancyheadzihao \CAST@value@englishfancytitle}
+  \fancyhead[RE]{\fancyheadzihao \CAST@value@englishfancytitle}
+  \fancyhead[RO,LE]{\fancyheadzihao \leftmark}
+  \fancyfoot[C]{\fancyheadzihao ~\thepage~}
   \renewcommand{\headrulewidth}{0.4pt}
 }
 
@@ -298,15 +299,15 @@
   
     \fancypagestyle{plain}{
       \fancyhf{}
-      \fancyhead[LO,RE]{\small }
-      \fancyhead[RO,LE]{\small }
+      \fancyhead[LO,RE]{\fancyheadzihao }
+      \fancyhead[RO,LE]{\fancyheadzihao }
       \fancyfoot[C]{}
       \renewcommand{\headrulewidth}{0pt}
     }
     \pagestyle{fancy}
     \fancyhf{}
-    \fancyhead[LO,RE]{\small }
-    \fancyhead[RO,LE]{\small }
+    \fancyhead[LO,RE]{\fancyheadzihao }
+    \fancyhead[RO,LE]{\fancyheadzihao }
     \fancyfoot[C]{}
     \renewcommand{\headrulewidth}{0pt}
 } 
@@ -314,17 +315,17 @@
 \newcommand\setThanksStyle{
     \fancypagestyle{plain}{
       \fancyhf{}
-      \fancyhead[LO,RE]{\songti \small \CAST@value@titlemark}
-      \fancyhead[RO,LE]{\songti \small 致谢}
+      \fancyhead[LO,RE]{\songti \fancyheadzihao \CAST@value@titlemark}
+      \fancyhead[RO,LE]{\songti \fancyheadzihao 致谢}
       %\fancyhead[RO,LE]{\songti \small \leftmark}
-      \fancyfoot[C]{\small ~\thepage~}
+      \fancyfoot[C]{\fancyheadzihao ~\thepage~}
     }
     \pagestyle{fancy}
     \fancyhf{}
-    \fancyhead[LO,RE]{\songti \small \CAST@value@titlemark}
-    \fancyhead[RO,LE]{\songti \small 致谢}
+    \fancyhead[LO,RE]{\songti \fancyheadzihao \CAST@value@titlemark}
+    \fancyhead[RO,LE]{\songti \fancyheadzihao 致谢}
     %\fancyhead[RO,LE]{\songti \small \leftmark}
-    \fancyfoot[C]{\small ~\thepage~}
+    \fancyfoot[C]{\fancyheadzihao ~\thepage~}
     \renewcommand{\headrulewidth}{0.4pt}
 }
 
