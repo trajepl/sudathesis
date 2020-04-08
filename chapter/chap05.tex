@@ -70,7 +70,7 @@
         \rho(X, Y) = \gamma(rg_X, rg_Y) =  \frac{E[(rg_X-\mu_{rg_X})(rg_Y-\mu_{rg_Y})]}{\sigma_{rg_X} \sigma_{rg_Y}}
     \end{equation}
     \noindent 其中符号含义类比公式~\ref{pearson}。可见，当两组变量排序前后相对顺序一致时，斯皮尔曼秩相关系数等于皮尔森相关系数。
-    \item 皮尔森相关系数与斯皮尔曼秩相关系数的调和平均（Harmonic mean）相关系数：这部分本文取皮尔森相关系数与斯皮尔曼秩相关系数的调和平均值作为最后的评价指标，公式如下。
+    \item 皮尔森相关系数与斯皮尔曼秩相关系数的调和平均（Harmonic mean）相关系数：这部分本文取皮尔森相关系数与斯皮尔曼秩相关系数的调和平均值作为最后的评价指标，公式如下：
     \begin{equation}
         \label{harmonic}
         \mu(X, Y) = \frac{2\gamma(X, Y)\rho(X, Y)}{\gamma(X, Y)+\rho(X, Y)}
@@ -98,7 +98,7 @@
 基于DBpedia构建知识关联网络的过程中，要通过Wikipedia页面信息建立起词语与实体之间的关系。本文采用维基百科2016年10月份的备份数据\footnote{https://dumps.wikimedia.your.org/}，并通过简单的文本分析建立起词语与维基百科之间的联系，然后再通过文章独有的数字ID建立起与DBpedia中实体之间的关系。其中Wikipedia与DBpedia的实体规模信息如表格~\ref{wiki_data}~所示。
 
 之前本文提到Wikipedia中的实体与DBpedia中一一对应，表格~\ref{wiki_data}~中所示DBpedia中的实体数量要多于Wikipedia中页面所描述的实体数。这是因为DBpedia不仅仅包含了从Wikipedia中抽取的实体，也连接了其他语义信息库如原语库、YAGO知识图谱等等。
-在连接Wikipedia页面与词语时，本文首先要对Wikipedia的语料库做简单的预处理。本文移除了文本中的停用词与标点符号，忽略了其中包含单词数少于50的页面，同时对于其中一些用处较少的命名空间（namespace）如分类（Category）、文件（File）以及模板（Template），\footnote{https://en.wikipedia.org/wiki/Wikipedia:Namespace}本文不予考虑。
+在连接Wikipedia页面与词语时，本文首先要对Wikipedia的语料库做简单的预处理。本文移除了文本中的停用词与标点符号，忽略了其中包含单词数少于50的页面，同时对于其中一些用处较少的命名空间（namespace）\footnote{https://en.wikipedia.org/wiki/Wikipedia:Namespace}，比如分类（Category）、文件（File）以及模板（Template），本文不予考虑。
 
 % \renewcommand\arraystretch{1.2}
 \begin{table}[htbp]
@@ -167,7 +167,7 @@
 
 
 \textbf{模型表现：}
-WordNet中存储了描述词语不同含义的同义实体集，这些实体之间的相关程度可以反映不同单词之间的关联性。回顾章节\ref{chap:chap03}中描述的基于WordNet构建的知识关联网络，其表现为有向无权图。为了丰富词语层的关联程度，本文在图注意力网络（GAT）的基础上，采用无监督训练的方式训练得到实体向量表示。在表格~\ref{table5-5}~中，本文基于三种基准评测数据集，给出了三种网络嵌入模型在实体层之间的关联程度$F_e(w_i, w_j)$（见前文公式~\ref{F_e}~）上的相关系数表现。其中$max$和$mean$分别对应于章节\ref{chap:chap03}中提到的计算实体层语义关联度的两种策略，对比模型的参数设置如下：
+WordNet中存储了描述词语不同含义的同义实体集，这些实体之间的相关程度可以反映不同单词之间的关联性。回顾章节\ref{chap:chap03}中描述的基于WordNet构建的知识关联网络，其表现为有向无权图。为了丰富词语层的关联程度，本文在图注意力网络（GAT）的基础上，采用无监督训练的方式Un-GAT训练得到实体向量表示。在表格~\ref{table5-5}~中，本文基于三种基准评测数据集，给出了三种网络嵌入模型在实体层之间的关联程度$F_e(w_i, w_j)$（见前文公式~\ref{F_e}~）上的相关系数表现。其中$max$和$mean$分别对应于章节\ref{chap:chap03}中提到的计算实体层语义关联度的两种策略，对比模型的参数设置如下：
 \begin{itemize}
     \item node2vec~\cite{kdd/GroverL16}是一种基于随机游走的无监督图嵌入模型，对于其提出的偏置随机游走策略，本文在公式~\ref{zeta}~中有过详细介绍。在本章节的对比实验中，本文设置其中的两个参数$p$和$q$均为1，游走长度为50，邻居窗口大小为10，对每个节点随机游走其相关序列采样10次。优化器采用Adam，其中学习率设置为0.01，权重衰减设置为0.0005。模型输出实体向量维度设置为256。
     \item GraphSage~\cite{nips/HamiltonYL17}是一种基于神经网络的图嵌入模型，这种模型通过不同的聚合算子来综合考虑固定邻居特征对当前节点的影响。本文采用基于平均策略的两层的GraphSage来进行实验，第一层和第二层的向量输出维度均设置为256，其中对于每个节点，其邻居采样大小设置为5。模型优化器设置为Adam，其中学习率为0.01，权重衰减值为0。

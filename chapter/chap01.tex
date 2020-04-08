@@ -2,7 +2,7 @@
 \label{chap:chap01}
 
 \section{研究背景和意义}
-在现实科研生活中，研究者们经常会遇到的一个问题是: 如何衡量两个具象事物或者抽象概念之间的相关程度。在计算机视觉（Computer Vision， CV）方面，有研究者通过研究词语与图片之间的关联程度来挖掘图片中存储的隐含语义\cite{iwcs/LeongM11}; 在生物医学中，研究者们需要去比较基因或者蛋白质之间的功能差异，由此来构建生物医学知识系统~\cite{bib/GuzziMGC12,bmcbi/BenabderrahmaneSPND10}；在地理学中，衡量两个地理学概念之间的差异与联系贯穿于整个地理学系统中~\cite{josis/JanowiczRK11}；自然语言处理（Natural Language Processing，NLP）中，大量任务需要比较两个对象之间的关联度，例如：命名实体识别中需要衡量候选实体集与目标实体之间的近似度~\cite{acl/HanZ10}，关键词抽取中需要评价候选关键词与文章的关联度~\cite{ijcai/ZhangFW13}，文本关联度度量任务需要评估句子或者文档之间的相似度~\cite{ijcai/YazdaniP13}等等。
+在现实科研生活中，研究者们经常会遇到的一个问题是: 如何衡量两个具象事物或者抽象概念之间的相关程度。在计算机视觉（Computer Vision， CV）方面，有研究者通过研究词语与图片之间的关联程度来挖掘图片中存储的隐含语义\cite{iwcs/LeongM11}; 在生物医学中，研究者们需要去比较基因或者蛋白质之间的功能差异，由此来构建生物医学知识系统~\cite{bib/GuzziMGC12,bmcbi/BenabderrahmaneSPND10}；在地理学中，衡量两个地理学概念之间的差异与联系贯穿于整个地理学系统中~\cite{josis/JanowiczRK11}；在自然语言处理（Natural Language Processing，NLP）中，大量任务需要比较两个对象之间的关联度，例如：命名实体识别中需要衡量候选实体集与目标实体之间的近似度~\cite{acl/HanZ10}，关键词抽取中需要评价候选关键词与文章的关联度~\cite{ijcai/ZhangFW13}，文本关联度度量任务需要评估句子或者文档之间的相似度~\cite{ijcai/YazdaniP13}等等。
 
 上述谈到的任务通常会涉及到词语之间的语义关联度（Semantic Relatedness）度量，所谓语义关联度，是指对于给定的一对单词，通过比较其语义表征来给出其背后包含的意义或其语义内容之间的相关程度。很多研究者经常不区分语义关联度与语义相似度（Semantic Similarity）之间的差异，语义相似度是指词语之间种属（is-a）关系的相似度，而语义关联度包含语义相似度，指考虑词语之间的所有关系（种属、反义、部分整体等）之后给出的词语间关联程度~\cite{geoinformatica/BallatoreBW14}。举个例子来说\emph{actor（演员）}跟\emph{person（人）}相似，但是跟\emph{movie（电影）、Hollywood（好莱坞）}相关联而不相似。
 
@@ -85,7 +85,7 @@ ii）大规模语料中的语义信息往往以非结构化或者半结构化的
 本小节针对不同的知识存储形式，从下面几个方面介绍历史研究者们如何挖掘知识库中包含的语义，如何完成语义关联度度量：
 
 \textbf{基于词法信息的度量方法:}
-这种方法基于WordNet和Wikitionary等单词词法库衡量词语间的语义关联度。WordNet作为一种英文词法关系库，其按照单词之间的语义内容和词法关系，将大量英文单词划分为一组组同义词集。Wikitionary\cite{aaai/ZeschMG08}作为一个人工构造的高质量词法库被提出，旨在为大量的的AI应用提供基础服务。对于一对词语，最早的研究者们\cite{its/Rada89, Leacock98, wu1994verb, tkde/LiBM03}在词法树中找到多条路径连接这两个词，其中最短的一条路径反映了两个词语之间的关联程度。还有一些研究者们，利用WordNet中的同义词集合对应的信息内容（Information Content, IC）值来衡量词语间关联度\cite{ijcai/Resnik95, RCLIC/Jiang97, icml/Lin98}，其中IC值被定义为$-log p(c)$，$p(c)$被定义为概念$c$出现在语料库中的频率。由此可见越是具体的概念，如“actor”其IC值越高，越是抽象的概念，如“person”其IC值越低。但是这种方法多用来建模词语间的层次关系，在语义相似度方面表现较好，但是对于涉及多种语义关系的关联度度量，这种方法表现不太好。
+这种方法基于WordNet和Wikitionary等单词词法库衡量词语间的语义关联度。WordNet作为一种英文词法关系库，其按照单词之间的语义内容和词法关系，将大量英文单词划分为一组组同义词集。Wikitionary\cite{aaai/ZeschMG08}作为一个人工构造的高质量词法库被提出，旨在为大量的的AI应用提供基础服务。对于一对词语，最早的研究者们\cite{its/Rada89, Leacock98, wu1994verb, tkde/LiBM03}在词法树中找到多条路径连接这两个词，其中最短的一条路径反映了两个词语之间的关联程度。还有一些研究者们，利用WordNet中的同义词集合对应的信息内容（Information Content，IC）值来衡量词语间关联度\cite{ijcai/Resnik95, RCLIC/Jiang97, icml/Lin98}，其中IC值被定义为$-log p(c)$，$p(c)$被定义为概念$c$出现在语料库中的频率。由此可见越是具体的概念，如“actor”其IC值越高，越是抽象的概念，如“person”其IC值越低。但是这种方法多用来建模词语间的层次关系，在语义相似度方面表现较好，但是对于涉及多种语义关系的关联度度量，这种方法表现不太好。
 
 \textbf{基于共现原则的度量方法:}
 为了更好地考虑词语的语义关系，研究者们提出基于词语共现关系来计算语义关联度的方法。即认为在语料文本中，两个词如果共同出现在一个句子或者一个窗口中，则这两个词是相关联的。最初的模型WikiRelate!~\cite{aaai/StrubeP06}利用维基页面中包含的文章类别（Categories）信息来衡量词语间的语义关联度。显式语义分析（Explicit Semantic Analysis，ESA）~\cite{ijcai/GabrilovichM07}首先将维基百科中一篇文章的语义信息表示为高维向量空间，然后通过向量空间的运算来衡量词语间的语义关联度。但是WikiRealted!和ESA仅仅考虑了文本中词语的统计信息，忽略了维基百科中文章之间的链接信息。接下来提出的WLM~\cite{aaai/Milne08}模型利用词语与维基页面中锚文本之间的匹配关系，建立起词语与文章的关系，由此利用文章之间的链接信息提升了词语间语来义关联度度量效果。随后提出的WikiWalk~\cite{textgraphs/YehRMAS09}模型则扩展了WLM模型，进一步考虑维基百科中的页面主体、信息框（infobox）和类别区域中的外链信息建立起文章之间的连接图，然后利用随机游走算法~\cite{emnlp/HughesR07}学习到图中每个节点的向量分布，最后通过向量之间的余弦距离来衡量词语间关联度。SSA\cite{aaai/HassanM11}则利用维基百科中词语上下文中的实体信息为词语构建语义画像，然后通过基于规则的方法计算词语间关联度；Word2Vec\cite{corr/Mikolov13}利用词语之间的共现信息来将词语表征在向量空间，由此来计算语义关联度。
