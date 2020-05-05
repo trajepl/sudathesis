@@ -4,6 +4,9 @@
 本章采用WordNet作为构建知识关联网络的知识库，并采用更具表达能力的分布式向量来表征实体语义信息，由此利用WordNet中实体的语义信息来丰富词语间的语义关联度度量。
 
 \section{WordNet简介}
+
+WordNet作为一种英文词法关系库，其按照单词（主要包含名词、动词、形容词和副词）之间的语义内容和词法关系，由专家与计算机合作将大量英文单词划分为一组组同义词集。这种按照意义分组的创建方式使得WordNet即不局限于传统词法词典，也不同于同义词词林，WordNet不仅仅是用同义词集的方式去展示客观概念或主观事物，同义词集之间更由不同语义关系相关联着，这些关系有上下位关系（hyponymy）、整体部分关系（meronymy）、继承关系（entailment）等。如图\ref{chap3-1}所示，对于单词\emph{apple}，WordNet中有两个实体与之对应，这两个实体分别描述了\emph{apple}作为一种水果的意义和作为一种植物的意义，同时这两个实体又分别有自己的关系属性，连接了其他与之关联的实体。
+
 %选用WordNet的理由
 \begin{figure}[!ht]
     \centerline{\includegraphics[width=0.8\textwidth]{chap3-1.pdf}}
@@ -11,13 +14,11 @@
     \label{chap3-1}
 \end{figure}
 
-WordNet作为一种英文词法关系库，其按照单词（主要包含名词、动词、形容词和副词）之间的语义内容和词法关系，由专家与计算机合作将大量英文单词划分为一组组同义词集。这种按照意义分组的创建方式使得WordNet即不局限于传统词法词典，也不同于同义词词林，WordNet不仅仅是用同义词集的方式去展示客观概念或主观事物，同义词集之间更由不同语义关系相关联着，这些关系有上下位关系（hyponymy）、整体部分关系（meronymy）、继承关系（entailment）等。如图\ref{chap3-1}所示，对于单词\emph{apple}，WordNet中有两个实体与之对应，这两个实体分别描述了\emph{apple}作为一种水果的意义和作为一种植物的意义，同时这两个实体又分别有自己的关系属性，连接了其他与之关联的实体。
-
 传统研究者\cite{its/Rada89, Leacock98, wu1994verb, tkde/LiBM03}主要利用WordNet中同义词集的距离信息来衡量词语之间的语义差别，这种方法多用来建模词语间的层次关系，在语义相似度方面表现较好，但是对于涉及多种语义关系的关联度度量，这种方法表现不太好。为了弥补这些缺点，本文通过网络嵌入的方式学习到更具表达能力的分布式向量表示，由此来更好的完成语义关联度度量。
 
 %构建
 \section{知识关联网络构建}
-对于知识关联网络的构建，首先要解决的问题是建立起词语与实体之间的直接联系。幸运的是，WordNet中提供了相应的查询接口来得到与词语相关的实体，其中最常用的接口是由宾夕法尼亚大学提出的自然语言处理工具包NLTK（Natural Language Toolkit）\cite{OM/Bird09}。NLTK中针对超过50种自然语言处理领域常用的语料和词法数据库提出了简单易上手的访问接口，在针对WordNet的接口中\footnote{https://www.nltk.org/howto/wordnet.html}，对于给定的单词，研究者们可以方便查询到与之相关的实体，反之对于给定的实体，也可以查询到与其相关联的多个单词。在知识关联网络的实体层，本文主要考察了WordNet中的上位关系（hypernyms）、下位关系（hyponyms）以及部分整体关系（member holonyms）。
+对于知识关联网络的构建，首先要解决的问题是建立起词语与实体之间的直接联系。幸运的是，WordNet中提供了相应的查询接口来得到与词语相关的实体，其中最常用的接口是由宾夕法尼亚大学提出的自然语言处理工具包NLTK（Natural Language Toolkit）。NLTK中针对超过50种自然语言处理领域常用的语料和词法数据库提出了简单易上手的访问接口，在针对WordNet的接口中\footnote{https://www.nltk.org/howto/wordnet.html}，对于给定的单词，研究者们可以方便查询到与之相关的实体，反之对于给定的实体，也可以查询到与其相关联的多个单词。在知识关联网络的实体层，本文主要考察了WordNet中的上位关系（hypernyms）、下位关系（hyponyms）以及部分整体关系（member holonyms）。
 
 \section{语义关联度计算}
 当词语与实体之间的联系被建立后，相应的语义关联度计算主要分为三部分：词语与词语之间的关联度、实体与实体之间的关联度以及词语与实体之间的关联度度量。本节将对这三个部分做详细介绍。
@@ -27,7 +28,7 @@ WordNet作为一种英文词法关系库，其按照单词（主要包含名词�
 词语层面的语义关联度计算主要包含两类方法：1）Word2Vec~\cite{corr/Mikolov13}和GloVe~\cite{emnlp/PenningtonSM14}等在大规模高质量语料库上训练的分布式向量表征方法；2）基于词语间共现原则的方法~\cite{aaai/StrubeP06, ijcai/GabrilovichM07}。以往的实验已经证明，前者训练得到的分布式向量表示可以更好地捕捉到词语的潜在语义信息，相比于基于共现原则的方法效果更好。因此本文采用Word2Vec的方法去训练Wikipedia来得到词向量。对于两个词语$w_i$和$w_j$来说，训练得到的词向量分别记为$\vec v_i$和$\vec v_j$，则$w_i$和$w_j$在词语之间的语义关联度$f_w(w_i, w_j)$可以通过向量余弦运算得到，有：
 \begin{equation}
     \label{cos}
-    f_w(w_i, w_j) = cos(\vec v_i,\vec v_j) = \frac{\vec v_i \cdot 
+    f_w(w_i, w_j) = cos(\vec v_i,\vec v_j) = \frac{\vec v_i \cdot
     \vec v_j}{\left \| \vec v_i \right \|\left \| \vec v_j \right \|}
 \end{equation}
 

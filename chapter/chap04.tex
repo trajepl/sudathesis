@@ -5,28 +5,22 @@
 
 \section{DBpedia简介}
 
+% 意义
+DBpedia是一项由开源社区维护的百科开源知识图谱，它源自于Wikipedia又不止与此。基于万物互连的思想，DBpedia连接起了Wikipedia、Wikitionary、WordNet以及其它大型开源知识库如Yago等，不仅如此，DBpedia还提供了可供全网访问的服务，研究者们可以以DBpedia为基础挖掘到越来越多的知识信息，大大方便了各项人工智能任务的推进。
+
+至2016年10月，DBpedia中包含了大约600万实体和13亿条RDF三元组，实体周围包含着丰富的语义信息。如图\ref{chap4-1}所示，对于科技公司\emph{Apple}，其在DBpedia中有唯一的URI（统一资源定位符）表示\emph{http://dbpedia.org/page/Apple\_Inc}，简记为\emph{Apple\_Inc}，同时还有多种实体以不同关系与\emph{Apple\_Inc}相连。其中，如\emph{Apple\_Inc}是\emph{IPod\_Mini}的生产商、\emph{Apple\_Inc}是一家公司\emph{Company}以及\emph{Apple\_Inc}位于\emph{California}等等描述了该实体的属性（Attributes）空间；而另一些关系如图\ref{chap4-1}所示，不包含明确的语义信息，仅仅在语料库中与该实体通过页面重定向关系（Wikipage Redirects of）相连。
+
 \begin{figure}[!ht]
     \centerline{\includegraphics[width=0.9\textwidth]{chap4-1.pdf}}
     \smallcaption{DBpedia中实体的语义特征示例}
     \label{chap4-1}
 \end{figure}
 
-% 意义
-DBpedia是一项由开源社区维护的百科开源知识图谱，它源自于Wikipedia又不止与此。基于万物互连的思想，DBpedia连接起了Wikipedia、Wikitionary、WordNet以及其它大型开源知识库如Yago等，不仅如此，DBpedia还提供了可供全网访问的服务，研究者们可以以DBpedia为基础挖掘到越来越多的知识信息，大大方便了各项人工智能任务的推进。
-
-至2016年10月，DBpedia中包含了大约600万实体和13亿条RDF三元组，实体周围包含着丰富的语义信息。如图\ref{chap4-1}所示，对于科技公司\emph{Apple}，其在DBpedia中有唯一的URI（统一资源定位符）表示\emph{http://dbpedia.org/page/Apple\_Inc}，简记为\emph{Apple\_Inc}，同时还有多种实体以不同关系与\emph{Apple\_Inc}相连。其中，如\emph{Apple\_Inc}是\emph{IPod\_Mini}的生产商、\emph{Apple\_Inc}是一家公司\emph{Company}以及\emph{Apple\_Inc}位于\emph{California}等等描述了该实体的属性（Attributes）空间；而另一些关系如图\ref{chap4-1}所示，不包含明确的语义信息，仅仅在语料库中与该实体通过页面重定向关系（Wikipage Redirects of）相连。
-
 %存储
-DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据库OpenLink Virtuoso\footnote{https://virtuoso.openlinksw.com/}中，并且用户可以通过Virtuoso开放的SPARQL端口\footnote{http://dbpedia.org/sparql}来通过HTTP请求访问DBpedia中的数据。其中SPARQL是一种针对RDF数据的图查询语言，能够自定模式来查询知识图谱中符合模式条件的三元组。
+DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据库OpenLink Virtuoso\footnote{https://virtuoso.openlinksw.com/} 中，并且用户可以通过Virtuoso开放的SPARQL端口\footnote{http://dbpedia.org/sparql}来通过HTTP请求访问DBpedia中的数据。其中SPARQL是一种针对RDF数据的图查询语言，能够自定模式来查询知识图谱中符合模式条件的三元组。
 
 
 \section{知识关联网络构建}
-
-\begin{figure}[!ht]
-    \centerline{\includegraphics[width=1\textwidth]{chap4-2.pdf}}
-    \smallcaption{基于DBpedia中构建的知识关联网络示例}
-    \label{chap4-2}
-\end{figure}
 
 在上一章中基于WordNet构建的知识关联网络中，词语与WordNet实体之间的对应关系被人工标记并存储在WordNet中，可以很方便地被查询到。而在DBpedia，我们无法直接拿到词语与DBpedia实体的对应关系。但是语料库Wikipedia中则包含了丰富的词语，其文本由词语构成，分类信息、外链信息等也都自然地表现为文本。而且Wikipedia中的页面也与DBpedia中的实体一一对应。本文基于这种对应关系，通过Wikipedia建立其词语与DBpedia中实体的对应关系。
 
@@ -38,6 +32,12 @@ DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据�
         ?E dbo:wikiPageID 856.
     }
 \end{lstlisting}
+
+\begin{figure}[!ht]
+    \centerline{\includegraphics[width=1\textwidth]{chap4-2.pdf}}
+    \smallcaption{基于DBpedia中构建的知识关联网络示例}
+    \label{chap4-2}
+\end{figure}
 
 对于DBpedia中实体周围的语义信息，本文将其分为属性信息（图\ref{chap4-2}中橘色节点所示）和拓扑结构信息，其中属性信息如上节中图\ref{chap4-1}所示明确地描述了实体的属性，而拓扑结构信息反映了实体之间的结构信息。在本文中为了更方便地表示实体的属性与拓扑结构空间，我们将实体属性所构成的图表示为$G_{attr} = \{a_1, a_2, ..., a_n\}$， 其中每个$a_i$描述了一条关系，这段关系以三元组的形式表现，由头实体（h）、关系（r）和尾实体（t）构成，即$a_i = (h, r, t)$。而对于实体所处的拓扑结构，我们将其定义为$G_{t} = (E, R_{redirect})$，表示由边$R_{redirect}$即\emph{WikiPageRedirectOf}连接的所有实体集$E$所构成的图。由此我们可以应用网络嵌入模型来学习实体的属性空间与拓扑结构空间的向量表示。
 
@@ -71,7 +71,7 @@ DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据�
     \label{fp}
     FP(w,e) = \left\{\begin{matrix}
         LP(w,e) & e \in e_{a}(w) & \\
-        \frac{tf\_idf(w,e)}{\sum_{e^{'} \in e_m(w)}^{ }tf\_idf(w,e^{'})} & e \in e_{m}(w) & 
+        \frac{tf\_idf(w,e)}{\sum_{e^{'} \in e_m(w)}^{ }tf\_idf(w,e^{'})} & e \in e_{m}(w) &
         \end{matrix}\right.
 \end{equation}
 \noindent 最后对于一个词语$w$与实体$e$之间的关联度，有：
@@ -132,9 +132,9 @@ DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据�
     \zeta_{pq}(t,x) = \left\{\begin{matrix}
         \frac{1}{p} && \text{if} & d_{tx} = 0 & \\
         1           && \text{if} & d_{tx} = 1 & \\
-        \frac{1}{q} && \text{if} & d_{tx} = 2 & 
+        \frac{1}{q} && \text{if} & d_{tx} = 2 &
         \end{matrix}\right.
-\end{equation} 
+\end{equation}
 \noindent 其中$t$表示上次访问的节点，$x$代表下一个要访问的节点，$d_{tx}$表示节点$t$与节点$x$之间的距离，参数$p$和$q$是两个需要提前设置的参数，用来调控深度优先遍历与广度优先遍历对采样过程的影响。
 
 如图\ref{chap4-4} 所示，对于给定的DBpedia无权图，我们通过上述基于$tf-idf$的方法给图中节点之间的关系加权，然后通过公式\ref{zeta}中的偏置随机游走策略生成采样序列。图\ref{chap4-4}右侧子图展示了偏置随机游走的过程，假设我们经过红色节点$t$到达了蓝色节点$v$，接下来可能走向的节点包含$\{t, x_1, x_2\}$，根据节点$t$到到这些节点的距离，对应的偏置权重如图所示，对于$x_1$来说，$d_{tx_1}$的值为2，则$x_1$作为随机游走的下一个节点的概率为边的的权重乘上$1/q$，其他节点类似。
@@ -161,7 +161,7 @@ DBpedia中实体及其边的关系主要以RDF的形式存储在开源图数据�
 通过对实体的潜在语义信息进行学习，将其映射到向量空间，我们可以得到实体的属性空间向量表征$\vec {va}_i$与拓扑结构空间的向量表征$\vec {vt}_i$，然后通过组合两者有：
 \begin{equation}
     \label{d_f_e}
-    f_e(e_i, e_j) = \alpha cos({\vec {va}_i, \vec {va}_j}) 
+    f_e(e_i, e_j) = \alpha cos({\vec {va}_i, \vec {va}_j})
     + (1-\alpha)cos(\vec {vt}_i,\vec {vt}_j)
 \end{equation}
 \noindent $\alpha$作为权重参数，取值范围为$[0,1]$，衡量了实体的属性空间与拓扑结构空间关联度对最后结果的影响。

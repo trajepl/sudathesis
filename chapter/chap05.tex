@@ -6,32 +6,6 @@
 \section{评测标准与实验数据}
 \subsection{评测数据}
 
-\begin{table*}[htbp]
-    \center
-    \smallcaption{MC30: 人为标注的词语间关联度数据示例}
-    \vspace{5pt}
-    \begin{tabular}{p{2cm}p{2cm}p{1.4cm}p{2cm}p{2cm}p{1.4cm}}
-    \hline
-    \multicolumn{2}{l}{词对}     & 标注值          & \multicolumn{2}{l}{词对}     & 标注值  \\ \hline
-    automobile    &    car    &    3.92 & gem    &    jewel    &    3.84  \\ \hline 
-    journey    &    voyage    &    3.84 & boy    &    lad    &    3.76  \\ \hline 
-    coast    &    shore    &    3.70 & asylum    &    madhouse    &    3.61  \\ \hline 
-    magician    &    wizard    &    3.50 & midday    &    noon    &    3.42  \\ \hline 
-    furnace    &    stove    &    3.11 & food    &    fruit    &    3.08  \\ \hline 
-    bird    &    cock    &    3.05 & bird    &    crane    &    2.97  \\ \hline 
-    implement    &    tool    &    2.95 & brother    &    monk    &    2.82  \\ \hline 
-    brother    &    lad    &    1.66 & crane    &    implement    &    1.68  \\ \hline 
-    car    &    journey    &    1.16 & monk    &    oracle    &    1.10  \\ \hline 
-    cemetery    &    woodland    &    0.95 & food    &    rooster    &    0.89  \\ \hline 
-    coast    &    hill    &    0.87 & forest    &    graveyard    &    0.84  \\ \hline 
-    shore    &    woodland    &    0.63 & monk    &    slave    &    0.55  \\ \hline 
-    coast    &    forest    &    0.42 & lad    &    wizard    &    0.42  \\ \hline 
-    cord    &    smile    &    0.13 & glass    &    magician    &    0.11  \\ \hline 
-    rooster    &    voyage    &    0.08 & noon    &    string    &    0.08  \\ \hline 
-    \end{tabular}
-    \label{mc30}
-\end{table*}
-
 词语间语义关联度度量是一个十分主观的事情，不同的人基于略有差异的认知，会得到不同的结果。为了方便研究者们的研究，不少语言学家和心理学家提出了很多人工标注的基准数据集~\cite{MC30/Miller02, RG65/RubensteinG65, wordsim353/FinkelsteinGMRSWR02, ws/AgirreAHKPS09, YP130/Yang06verbsimilarity, MEN/BruniTB14}，本文列举了以往研究者常用的三种数据集的信息，并且本文利用这三种数据集作为模型的评价数据集合：
 \begin{enumerate}[（1）]
     \item RG65~\cite{RG65/RubensteinG65}：RG65作为经典的数据集，常用来作为语义相似度度量的标准数据集，其中包含有65对英文名词。对于每对词语，受试者们给出一个在$[0,4]$之间的相关度值然后取平均值作为最后的评分，该评分越高，两个词相似度越高，反之亦然。
@@ -39,6 +13,33 @@
     \item WS353~\cite{wordsim353/FinkelsteinGMRSWR02}：WS353中包含353对英文单词，其词性包含名词、动词以及形容词，是常用的词语间语义关联度度量的评测数据。词对间关联度评分取值范围为$[0,10]$，值越大，两个单词关联度越高。
 \end{enumerate}
 最后在表格~\ref{golden}，本文整理并给出本文所使用的评测数据集及其简要信息。
+
+
+\begin{table*}[htbp]
+    \center
+    \smallcaption{MC30: 人为标注的词语间关联度数据示例}
+    \vspace{5pt}
+    \begin{tabular}{p{2cm}p{2cm}p{1.4cm}p{2cm}p{2cm}p{1.4cm}}
+    \hline
+    \multicolumn{2}{l}{词对}     & 标注值          & \multicolumn{2}{l}{词对}     & 标注值  \\ \hline
+    automobile    &    car    &    3.92 & gem    &    jewel    &    3.84  \\ \hline
+    journey    &    voyage    &    3.84 & boy    &    lad    &    3.76  \\ \hline
+    coast    &    shore    &    3.70 & asylum    &    madhouse    &    3.61  \\ \hline
+    magician    &    wizard    &    3.50 & midday    &    noon    &    3.42  \\ \hline
+    furnace    &    stove    &    3.11 & food    &    fruit    &    3.08  \\ \hline
+    bird    &    cock    &    3.05 & bird    &    crane    &    2.97  \\ \hline
+    implement    &    tool    &    2.95 & brother    &    monk    &    2.82  \\ \hline
+    brother    &    lad    &    1.66 & crane    &    implement    &    1.68  \\ \hline
+    car    &    journey    &    1.16 & monk    &    oracle    &    1.10  \\ \hline
+    cemetery    &    woodland    &    0.95 & food    &    rooster    &    0.89  \\ \hline
+    coast    &    hill    &    0.87 & forest    &    graveyard    &    0.84  \\ \hline
+    shore    &    woodland    &    0.63 & monk    &    slave    &    0.55  \\ \hline
+    coast    &    forest    &    0.42 & lad    &    wizard    &    0.42  \\ \hline
+    cord    &    smile    &    0.13 & glass    &    magician    &    0.11  \\ \hline
+    rooster    &    voyage    &    0.08 & noon    &    string    &    0.08  \\ \hline
+    \end{tabular}
+    \label{mc30}
+\end{table*}
 
 \begin{table}[htbp]
     \center
@@ -48,7 +49,7 @@
     \hline
     数据名称    & 词对数量    & 取值范围      & 引文 \\ \hline
     RG        & 65         & [0,4]       & Rubenstein\&Goodenough1965       \\ \hline
-    MC        & 30         & [0,4]       & Miller\&Charles1991          \\ \hline 
+    MC        & 30         & [0,4]       & Miller\&Charles1991          \\ \hline
     WS353     & 353        & [0,10]      & Finkelstein et al.2002         \\ \hline
     \end{tabular}
     \label{golden}
@@ -126,6 +127,13 @@
     \item 训练自注意力模型时，本文采用Adam算法来优化目标函数，其中初始学习率设置为0.01，权重衰减值（weight\_decay）设置为0。
 \end{itemize}
 
+\textbf{模型表现：}
+WordNet中存储了描述词语不同含义的同义实体集，这些实体之间的相关程度可以反映不同单词之间的关联性。回顾章节\ref{chap:chap03}中描述的基于WordNet构建的知识关联网络，其表现为有向无权图。为了丰富词语层的关联程度，本文在图注意力网络（GAT）的基础上，采用无监督训练的方式训练得到实体向量表示。在表格~\ref{table5-5}~中，本文基于三种基准评测数据集，给出了三种网络嵌入模型在实体层之间的关联程度$F_e(w_i, w_j)$（见前文公式~\ref{F_e}~）上的相关系数表现。其中$max$和$mean$分别对应于章节\ref{chap:chap03}中提到的计算实体层语义关联度的两种策略，对比模型的参数设置如下：
+\begin{itemize}
+    \item node2vec~\cite{kdd/GroverL16}是一种基于随机游走的无监督图嵌入模型，对于其提出的偏置随机游走策略，本文在公式~\ref{zeta}~中有过详细介绍。在本章节的对比实验中，本文设置其中的两个参数$p$和$q$均为1，游走长度为50，邻居窗口大小为10，对每个节点随机游走其相关序列采样10次。优化器采用Adam，其中学习率设置为0.01，权重衰减设置为0.0005。模型输出实体向量维度设置为256。
+    \item GraphSage~\cite{nips/HamiltonYL17}是一种基于神经网络的图嵌入模型，这种模型通过不同的聚合算子来综合考虑固定邻居特征对当前节点的影响。本文采用基于平均策略的两层的GraphSage来进行实验，第一层和第二层的向量输出维度均设置为256，其中对于每个节点，其邻居采样大小设置为5。模型优化器设置为Adam，其中学习率为0.01，权重衰减值为0。
+\end{itemize}
+
 
 \begin{table*}[htbp]
     \center
@@ -133,7 +141,7 @@
     \vspace{5pt}
     \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
     \hline
-    \multirow{2}{*}{图嵌入模型}     & \multirow{2}{*}{策略} & \multicolumn{3}{c|}{$\lambda$} & \multicolumn{3}{c|}{$\rho$} & \multicolumn{3}{c|}{$\mu$} \\ \cline{3-11} 
+    \multirow{2}{*}{图嵌入模型}     & \multirow{2}{*}{策略} & \multicolumn{3}{c|}{$\lambda$} & \multicolumn{3}{c|}{$\rho$} & \multicolumn{3}{c|}{$\mu$} \\ \cline{3-11}
      &
        &
       \multicolumn{1}{c|}{\textbf{MC}} &
@@ -155,25 +163,20 @@
       \multicolumn{1}{c|}{-0.093} &
       \multicolumn{1}{c|}{0.419} &
       \multicolumn{1}{c|}{0.528} &
-      \multicolumn{1}{c|}{-0.064} \\ \cline{2-11} 
+      \multicolumn{1}{c|}{-0.064} \\ \cline{2-11}
                                & mean & 0.142 & 0.263 & -0.001 & 0.197 & 0.320 & -0.039 & 0.165 & 0.289 & -0.002 \\ \hline
-    \multirow{2}{*}{GraphSage} & max  & 0.872 & 0.808 & 0.421 & 0.833 & 0.799 & 0.173 & 0.852 & 0.803 & 0.245 \\ \cline{2-11} 
+    \multirow{2}{*}{GraphSage} & max  & 0.872 & 0.808 & 0.421 & 0.833 & 0.799 & 0.173 & 0.852 & 0.803 & 0.245 \\ \cline{2-11}
                                & mean & 0.706 & 0.637 & 0.464 & 0.661 & 0.641 & 0.458 & 0.683  & 0.639 & 0.461 \\ \hline
-    \multirow{2}{*}{Un-GAT}       & max  & $\bf 0.913$ & $\bf 0.848$ & 0.435 & $\bf 0.845$ & $\bf 0.816$ & 0.397 & $\bf 0.878$  & $\bf 0.832$ & 0.415 \\ \cline{2-11} 
+    \multirow{2}{*}{Un-GAT}       & max  & $\bf 0.913$ & $\bf 0.848$ & 0.435 & $\bf 0.845$ & $\bf 0.816$ & 0.397 & $\bf 0.878$  & $\bf 0.832$ & 0.415 \\ \cline{2-11}
                                & mean & 0.632 & 0.662 & $\bf 0.549$ & 0.635 & 0.652 & $\bf 0.515$ & 0.633 & 0.657 & $\bf 0.531$ \\ \hline
     \end{tabular}
     \label{table5-5}
 \end{table*}
 
-
-\textbf{模型表现：}
-WordNet中存储了描述词语不同含义的同义实体集，这些实体之间的相关程度可以反映不同单词之间的关联性。回顾章节\ref{chap:chap03}中描述的基于WordNet构建的知识关联网络，其表现为有向无权图。为了丰富词语层的关联程度，本文在图注意力网络（GAT）的基础上，采用无监督训练的方式训练得到实体向量表示。在表格~\ref{table5-5}~中，本文基于三种基准评测数据集，给出了三种网络嵌入模型在实体层之间的关联程度$F_e(w_i, w_j)$（见前文公式~\ref{F_e}~）上的相关系数表现。其中$max$和$mean$分别对应于章节\ref{chap:chap03}中提到的计算实体层语义关联度的两种策略，对比模型的参数设置如下：
-\begin{itemize}
-    \item node2vec~\cite{kdd/GroverL16}是一种基于随机游走的无监督图嵌入模型，对于其提出的偏置随机游走策略，本文在公式~\ref{zeta}~中有过详细介绍。在本章节的对比实验中，本文设置其中的两个参数$p$和$q$均为1，游走长度为50，邻居窗口大小为10，对每个节点随机游走其相关序列采样10次。优化器采用Adam，其中学习率设置为0.01，权重衰减设置为0.0005。模型输出实体向量维度设置为256。
-    \item GraphSage~\cite{nips/HamiltonYL17}是一种基于神经网络的图嵌入模型，这种模型通过不同的聚合算子来综合考虑固定邻居特征对当前节点的影响。本文采用基于平均策略的两层的GraphSage来进行实验，第一层和第二层的向量输出维度均设置为256，其中对于每个节点，其邻居采样大小设置为5。模型优化器设置为Adam，其中学习率为0.01，权重衰减值为0。
-\end{itemize}
-
 基于上述模型参数设置，从表格~\ref{table5-5}~中可以看出，基于$max$的策略取实体集之间的最大关联度作为计算结果，要比取平均值的$mean$策略效果要好很多。这在一定程度上也符合人类判断直觉，当两个词的某个意思关联度比较高而其他含义相关度不高时，人们常常认为两个词是相关的。此外，从表格~\ref{table5-5}~中还可以看出，基于图注意力网络的无监督训练得到结果取得了最好的效果，即可以更好地表征实体的语义特征。接下来本文将介绍基于图注意力网络的无监督训练与词语层关联度度量对最终结果的影响。
+
+前文提到的参数$\varphi$用来权衡词语层关联度与实体层关联度对最终语义关联度的影响，如图\ref{fig:lambda_w_max}和图\ref{fig:lambda_w_mean}，本文给出了$\varphi$对最终结果的影响。从图\ref{fig:lambda_w_max}可以看出在基于max策略的实体层关联度度量模型中，对于MC和RG这两个数据集，$\varphi$取$0$时的效果最好。这是因为本文在网络输入初始化的时候，采用的是实体相关联的词向量平均值作为输入，这在一定程度上已经考虑了从文本中训练得到的语义向量信息，而WordNet知识关联网络嵌入则起到了学习词语背后相关联实体的语义内容的作用，可以看出最后结果要比单纯文本训练词向量的结果要好。而对于WS这个数据集，当$\varphi$取$0.8$时，模型效果最优，词语层关联度起主要贡献。另外在图\ref{fig:lambda_w_mean}基于mean的策略中，知识关联网络嵌入中学习到的实体语义信息被平均弱化，表现不如基于max的策略。但是当$\varphi$取$0.3$的时候，网络嵌入学习得到的语义信息还是可以为词向量补充语义信息。
+
 
 \begin{figure}[htbp]
     \begin{minipage}{0.48\textwidth}
@@ -191,7 +194,6 @@ WordNet中存储了描述词语不同含义的同义实体集，这些实体之�
     \label{fig:wordnet_sr}
 \end{figure}
 
-前文提到的参数$\varphi$用来权衡词语层关联度与实体层关联度对最终语义关联度的影响，如图\ref{fig:lambda_w_max}和图\ref{fig:lambda_w_mean}，本文给出了$\varphi$对最终结果的影响。从图\ref{fig:lambda_w_max}可以看出在基于max策略的实体层关联度度量模型中，对于MC和RG这两个数据集，$\varphi$取$0$时的效果最好。这是因为本文在网络输入初始化的时候，采用的是实体相关联的词向量平均值作为输入，这在一定程度上已经考虑了从文本中训练得到的语义向量信息，而WordNet知识关联网络嵌入则起到了学习词语背后相关联实体的语义内容的作用，可以看出最后结果要比单纯文本训练词向量的结果要好。而对于WS这个数据集，当$\varphi$取$0.8$时，模型效果最优，词语层关联度起主要贡献。另外在图\ref{fig:lambda_w_mean}基于mean的策略中，知识关联网络嵌入中学习到的实体语义信息被平均弱化，表现不如基于max的策略。但是当$\varphi$取$0.3$的时候，网络嵌入学习得到的语义信息还是可以为词向量补充语义信息。
 
 \subsection{基于DBpedia构建的知识关联网络}
 \textbf{参数设置：}
@@ -203,23 +205,23 @@ WordNet中存储了描述词语不同含义的同义实体集，这些实体之�
 \end{itemize}
 
 
+\textbf{模型表现：}
+回顾\ref{subsec4-3-3}节实体层之间的关联度度量，对于实体所处的拓扑结构空间，本文采用两种策略来为实体之间的关系分配权重：1）$W_{cnt}(e_i,e_j)$表示实体$e_i$与实体$e_j$对应的锚文本之间的共现频率；2）$W_{tf\_idf}(e_i,e_j)$评估了实体$e_j$的锚文本相对于$e_i$所对应文章的重要程度。基于这两种评价策略，本文分别构造得到两种知识关联网络$KAN_{cnt}$以及$KAN_{tf\_idf}$。从表格~\ref{table5-6}~中可以看出，基于$KAN_{tf\_idf}$的语义关联度度量模型在不同评测数据集上表现都更加好。这是因为$tf-idf$适当的调节了文章中的关键词词频，通过考虑逆文档频率降低了高频通用词的权重，使得词语与文档之间的关联度度量更准确。
+
+
 \begin{table*}[htbp]
     \center
     \smallcaption{不同的权重分配策略构建的知识关联网络在三种数据集上的皮尔森-$\lambda$, 斯皮尔曼秩-$\rho$, 调和平均-$\mu$相关系数}
     \vspace{5pt}
     \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
     \hline
-    \multirow{2}{*}{模型} & \multicolumn{3}{c|}{$\lambda$}     & \multicolumn{3}{c|}{$\rho$}          & \multicolumn{3}{c|}{$\mu$} \\ \cline{2-10} 
+    \multirow{2}{*}{模型} & \multicolumn{3}{c|}{$\lambda$}     & \multicolumn{3}{c|}{$\rho$}          & \multicolumn{3}{c|}{$\mu$} \\ \cline{2-10}
                            & \textbf{MC}&\textbf{RG}&\textbf{WS} & \textbf{MC}&\textbf{RG}&\textbf{WS} & \textbf{MC}&\textbf{RG}&\textbf{WS}\\ \hline
     $KAN_{cnt}$            & 0.850 & 0.826 & 0.630 & 0.836 & 0.805 & 0.633 & 0.842 & 0.816 & 0.631   \\ \hline
     $KAN_{tf\_idf}$        & $\bf 0.892$  & $\bf 0.887$ & $\bf 0.783$ & $\bf 0.866$ & $\bf 0.861$ & $\bf 0.835$ & $\bf 0.879$ & $\bf 0.874$ & $\bf 0.808$ \\ \hline
     \end{tabular}
     \label{table5-6}
 \end{table*}
-
-
-\textbf{模型表现：}
-回顾\ref{subsec4-3-3}节实体层之间的关联度度量，对于实体所处的拓扑结构空间，本文采用两种策略来为实体之间的关系分配权重：1）$W_{cnt}(e_i,e_j)$表示实体$e_i$与实体$e_j$对应的锚文本之间的共现频率；2）$W_{tf\_idf}(e_i,e_j)$评估了实体$e_j$的锚文本相对于$e_i$所对应文章的重要程度。基于这两种评价策略，本文分别构造得到两种知识关联网络$KAN_{cnt}$以及$KAN_{tf\_idf}$。从表格~\ref{table5-6}~中可以看出，基于$KAN_{tf\_idf}$的语义关联度度量模型在不同评测数据集上表现都更加好。这是因为$tf-idf$适当的调节了文章中的关键词词频，通过考虑逆文档频率降低了高频通用词的权重，使得词语与文档之间的关联度度量更准确。
 
 前文提到的参数$\alpha$用来平衡属性空间关联度与拓扑结构空间关联度之间的权重。为了得到最优的模型表现和提高模型鲁棒性，本文不在最终评测数据集上调节参数，而是选择在数据集\emph{WS-Rel}~\cite{ws/AgirreAHKPS09}上试验参数$\alpha$对最终结果的影响。\emph{WS-Rel}中包含有252个单词对以及关联度评分值，这个数据集在很多关联度数据集中没有被使用。图~\ref{fig:alpha}~展示了不同的$\alpha$取值对最后Spearman相关系数($\rho$)的影响，可以看出当$\alpha$趋近于0.5的时候，$\rho$取值最大，这意味着属性空间的语义信息与拓扑结构中所包含的隐含语义信息对语义关联度的计算有着相同的贡献。
 
@@ -264,7 +266,7 @@ WordNet中存储了描述词语不同含义的同义实体集，这些实体之�
     \vspace{5pt}
     \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
     \hline
-    \multirow{2}{*}{模型} & \multicolumn{3}{c|}{$\lambda$}     & \multicolumn{3}{c|}{$\rho$}          & \multicolumn{3}{c|}{$\mu$} \\ \cline{2-10} 
+    \multirow{2}{*}{模型} & \multicolumn{3}{c|}{$\lambda$}     & \multicolumn{3}{c|}{$\rho$}          & \multicolumn{3}{c|}{$\mu$} \\ \cline{2-10}
                            & \textbf{MC}&\textbf{RG}&\textbf{WS} & \textbf{MC}&\textbf{RG}&\textbf{WS} & \textbf{MC}&\textbf{RG}&\textbf{WS}\\ \hline
     ESA                    & 0.588 &  - -  & 0.503 & 0.727 &  - -  & 0.748 & 0.650 &  - - & 0.602    \\ \hline
     SSA                    & 0.879 & 0.861 & 0.590 & 0.843 & 0.833 & 0.604 & 0.861 & 0.847 & 0.597   \\ \hline
